@@ -1,9 +1,11 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Logo from "../../../public/LOGO-1.png";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react"; // <-- Lucide icons
+import { Menu, X } from "lucide-react";
+import creations from "../../utils/creation.json"; // Assuming this is the correct path to your creations data
+import { motion } from "framer-motion";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +18,23 @@ export const Header = () => {
       contact: "Contacter",
     },
   ];
+  const menuItems = [
+    { id: "services", label: "Services" },
+    { id: "a-propos", label: "À propos" },
+    ...(creations.length > 0
+      ? [{ id: "creations", label: "Nos créations" }]
+      : []),
+    { id: "contact", label: "Contact" },
+  ];
 
+  console.log(creations.length);
   return (
-    <header className="container mx-auto px-4 py-6 flex justify-between items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white">
+    <motion.header
+      className="container mx-auto px-4 py-6 flex justify-between items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Logo */}
       <Link href="#">
         <Image
@@ -32,26 +48,30 @@ export const Header = () => {
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-10 items-center">
-        <Link
-          href="#services"
-          className="hover:text-amber-500/90 hover:scale-110 transition-transform duration-300"
-        >
-          {headerList[0].services}
-        </Link>
-        <Link
-          href="#about"
-          className="hover:text-amber-500/90 hover:scale-110 transition-transform duration-300"
-        >
-          {headerList[0].about}
-        </Link>
-        <Link
-          href="#contact"
-          className="border rounded-3xl bg-amber-500/90 px-4 py-2 text-[#102a47] transition-transform hover:scale-110 duration-300 font-semibold"
-        >
-          {headerList[0].contact}
-        </Link>
-      </nav>
+        {menuItems.map((item) => {
+          if (item.id === "contact") {
+            return (
+              <Link
+                key={item.id}
+                href={`#${item.id}`}
+                className="bg-amber-500/90 text-[#102a47] px-4 py-2 rounded-3xl font-semibold hover:bg-amber-500/70 transition-colors"
+              >
+                {item.label}
+              </Link>
+            );
+          }
 
+          return (
+            <Link
+              key={item.id}
+              href={`#${item.id}`}
+              className="hover:text-amber-500/90 text-lg font-medium"
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
       {/* Mobile Hamburger Button (Lucide icons) */}
       <button
         className="md:hidden text-white"
@@ -64,29 +84,22 @@ export const Header = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 right-0 bg-[#102a47] md:hidden flex flex-col items-center gap-4 py-6 shadow-lg">
-          <Link
-            href="#services"
-            className="hover:text-amber-500/90 text-lg font-medium"
-            onClick={() => setIsOpen(false)}
-          >
-            {headerList[0].services}
-          </Link>
-          <Link
-            href="#about"
-            className="hover:text-amber-500/90 text-lg font-medium"
-            onClick={() => setIsOpen(false)}
-          >
-            {headerList[0].about}
-          </Link>
-          <Link
-            href="#contact"
-            className="bg-amber-500/90 text-[#102a47] px-4 py-2 rounded-3xl font-semibold"
-            onClick={() => setIsOpen(false)}
-          >
-            {headerList[0].contact}
-          </Link>
+          {menuItems.map((item) => (
+            <Link
+              key={item.id}
+              href={`#${item.id}`}
+              className={
+                item.id === "contact"
+                  ? "bg-amber-500/90 text-[#102a47] px-4 py-2 rounded-3xl font-semibold hover:bg-amber-500/70 transition-colors"
+                  : "hover:text-amber-500/90 text-lg font-medium"
+              }
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       )}
-    </header>
+    </motion.header>
   );
 };
