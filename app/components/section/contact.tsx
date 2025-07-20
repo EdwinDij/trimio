@@ -2,10 +2,11 @@
 import { motion } from "framer-motion";
 import { Info, Mail, Phone } from "lucide-react";
 import React from "react";
+import Link from "next/link";
 
 export const Contact = () => {
   return (
-    <section id="contact" className="bg-[#14365C] text-white py-16 px-4">
+    <section id="contact" className="bg-[#14365C] text-white py-25 px-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre + intro */}
         <motion.div
@@ -153,14 +154,14 @@ export const Contact = () => {
                 <div className="w-10 h-10 rounded-full bg-blue-800/30 flex items-center justify-center">
                   <Mail className="w-5 h-5 text-amber-500/90" />
                 </div>
-                <a
+                <Link
                   href="mailto:contact@trimioedit.com"
                   className=" hover:text-amber-500/90 transition-colors"
                 >
                   contact@trimioedit.com
-                </a>
+                </Link>
               </div>
-              <div className="flex items-center space-x-4 text-lg">
+              {/* <div className="flex items-center space-x-4 text-lg">
                 <div className="w-10 h-10 rounded-full bg-blue-800/30 flex items-center justify-center">
                   <Phone className="w-5 h-5 text-amber-500/90" />
                 </div>
@@ -170,7 +171,7 @@ export const Contact = () => {
                 >
                   06 50 36 96 39
                 </a>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </div>

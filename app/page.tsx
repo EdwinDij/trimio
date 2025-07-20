@@ -1,4 +1,4 @@
-import { Header, Hero, Services, About, Contact } from "./components";
+import { Header, Hero, Services, About, Contact, Footer } from "./components";
 export default function Home() {
   return (
     <>
@@ -9,6 +9,7 @@ export default function Home() {
         <About />
         <Contact />
       </main>
+      <Footer />
     </>
   );
 }
