@@ -9,8 +9,19 @@ body {
   line-height: 1.6;
   background-image: radial-gradient(#f7f9fb17 1px, transparent 1px);
   background-size: 20px 20px;
+  
 }
 
 a {
   text-decoration: none;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+}
+nav {
+  font-family: "Inter", sans-serif;
+}
+article {
+  font-family: "Inter", sans-serif;
 }

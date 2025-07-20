@@ -1,2 +1,2 @@
-export {Header} from './layout';
-export {Hero} from './section';
+export { Header } from './layout';
+export { Hero, Services } from './section';

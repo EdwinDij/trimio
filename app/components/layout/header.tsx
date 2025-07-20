@@ -6,19 +6,11 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import creations from "../../utils/creation.json"; // Assuming this is the correct path to your creations data
 import { motion } from "framer-motion";
-
+import { navbarItem } from "../../types/listItems"; // Adjust the import path as necessary
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const headerList = [
-    {
-      logo: Logo,
-      services: "Services",
-      about: "A propos",
-      contact: "Contacter",
-    },
-  ];
-  const menuItems = [
+  const menuItems: navbarItem[] = [
     { id: "services", label: "Services" },
     { id: "a-propos", label: "À propos" },
     ...(creations.length > 0
@@ -27,7 +19,6 @@ export const Header = () => {
     { id: "contact", label: "Contact" },
   ];
 
-  console.log(creations.length);
   return (
     <motion.header
       className="container mx-auto px-4 py-6 flex justify-between items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white"
@@ -36,12 +27,7 @@ export const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <Link href="#">
-        <Image
-          src={headerList[0].logo}
-          alt="Logo"
-          width={80}
-          height={60}
-        />
+        <Image src={Logo} alt="Logo" width={80} height={60} />
       </Link>
 
       {/* Desktop Navigation */}
