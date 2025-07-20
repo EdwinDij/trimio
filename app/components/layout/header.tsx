@@ -35,14 +35,12 @@ export const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Logo */}
       <Link href="#">
         <Image
           src={headerList[0].logo}
           alt="Logo"
           width={80}
           height={60}
-          className="rounded-full"
         />
       </Link>
 
@@ -54,7 +52,7 @@ export const Header = () => {
               <Link
                 key={item.id}
                 href={`#${item.id}`}
-                className="bg-amber-500/90 text-[#102a47] px-4 py-2 rounded-3xl font-semibold hover:bg-amber-500/70 transition-colors"
+                className="bg-amber-500/90 text-[#102a47] px-4 py-2 rounded-full font-semibold hover:bg-amber-500/70 transition-colors"
               >
                 {item.label}
               </Link>
