@@ -1,10 +1,42 @@
 "use client";
 import { motion } from "framer-motion";
 import { Info, Mail, Phone } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export const Contact = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [projectType, setProjectType] = useState<string[]>([]);
+  const [description, setDescription] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log({ name, email, projectType, description });
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APIROUTE}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        projectType,
+        description,
+      }),
+    });
+    if (response.ok) {
+      alert("Message envoyé avec succès !");
+      setName("");
+      setEmail("");
+      setProjectType([]);
+      setDescription("");
+    } else {
+      alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+    }
+  };
+
   return (
     <section id="contact" className="bg-[#14365C] text-white py-25 px-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +66,7 @@ export const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            onSubmit={(e) => e.preventDefault()} // éviter reload page pour l’exemple
+            onSubmit={handleSubmit} // éviter reload page pour l’exemple
           >
             <div>
               <label htmlFor="name" className=" font-semibold">
@@ -46,6 +78,7 @@ export const Contact = () => {
                 required
                 className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white  focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="Ex : Dupont"
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
@@ -59,6 +92,7 @@ export const Contact = () => {
                 required
                 className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="exemple@mail.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -69,36 +103,60 @@ export const Contact = () => {
               <div className="flex items-center gap-4 mt-2">
                 <input
                   type="checkbox"
-                  id="video"
+                  id="derushage"
                   name="projectType"
-                  value="video"
+                  value="derushage"
                   className="accent-blue-500 focus:ring-amber-500/90"
                   required
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setProjectType((prev) =>
+                      prev.includes(value)
+                        ? prev.filter((v) => v !== value)
+                        : [...prev, value]
+                    );
+                  }}
                 />
-                <label htmlFor="video" className="text-white">
-                  Vidéo
+                <label htmlFor="Dérushage vidéo" className="text-white">
+                  Dérushage vidéo
                 </label>
                 <input
                   type="checkbox"
-                  id="photo"
+                  id="Montage vidéo"
                   name="projectType"
-                  value="photo"
+                  value="Montage vidéo"
                   className="accent-blue-500 focus:ring-amber-500/90"
                   required
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setProjectType((prev) =>
+                      prev.includes(value)
+                        ? prev.filter((v) => v !== value)
+                        : [...prev, value]
+                    );
+                  }}
                 />
-                <label htmlFor="photo" className="text-white">
-                  Photo
+                <label htmlFor="Montage vidéo" className="text-white">
+                  Montage vidéo
                 </label>
                 <input
                   type="checkbox"
-                  id="autre"
+                  id="Etalonnage avancé"
                   name="projectType"
-                  value="autre"
+                  value="Etalonnage avancé"
                   className="accent-blue-500 focus:ring-amber-500/90"
                   required
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setProjectType((prev) =>
+                      prev.includes(value)
+                        ? prev.filter((v) => v !== value)
+                        : [...prev, value]
+                    );
+                  }}
                 />
-                <label htmlFor="autre" className="text-white">
-                  Autre
+                <label htmlFor="Etalonnage avancé" className="text-white">
+                  Etalonnage avancé
                 </label>
               </div>
             </div>
@@ -112,6 +170,7 @@ export const Contact = () => {
                 rows={5}
                 className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="Votre projet en quelques mots..."
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <button
