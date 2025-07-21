@@ -26,7 +26,7 @@ export const Hero = () => {
           />
         </motion.div>
 
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -34,7 +34,7 @@ export const Hero = () => {
         >
           Donnez vie à vos vidéos,<br />
           <span className="text-amber-500/90"> avec une touche de génie</span>
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 50 }}

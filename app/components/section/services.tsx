@@ -32,7 +32,7 @@ export const Services = () => {
   return (
     <section id="services" className="bg-[#14365C] px-6 py-25 sm:px-6 lg:px-10">
       <div className="container mx-auto max-w-7xl">
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -40,7 +40,7 @@ export const Services = () => {
           className="text-center text-3xl sm:text-4xl font-bold text-white mb-4"
         >
           Nos Services
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
