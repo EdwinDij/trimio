@@ -107,7 +107,6 @@ export const Contact = () => {
                   name="projectType"
                   value="derushage"
                   className="accent-blue-500 focus:ring-amber-500/90"
-                  required
                   onChange={(e) => {
                     const value = e.target.value;
                     setProjectType((prev) =>
@@ -126,7 +125,6 @@ export const Contact = () => {
                   name="projectType"
                   value="Montage vidéo"
                   className="accent-blue-500 focus:ring-amber-500/90"
-                  required
                   onChange={(e) => {
                     const value = e.target.value;
                     setProjectType((prev) =>
@@ -145,7 +143,6 @@ export const Contact = () => {
                   name="projectType"
                   value="Etalonnage avancé"
                   className="accent-blue-500 focus:ring-amber-500/90"
-                  required
                   onChange={(e) => {
                     const value = e.target.value;
                     setProjectType((prev) =>
