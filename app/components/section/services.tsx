@@ -3,8 +3,12 @@ import React from "react";
 import { Scissors, Film } from "lucide-react";
 import { serviceItem } from "../../types/listItems";
 import { motion } from "framer-motion";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const Services = () => {
+
+  const isMobile = useIsMobile();
+  
   const servicesList: serviceItem[] = [
     {
       id: 1,
@@ -56,7 +60,7 @@ export const Services = () => {
           {servicesList.map((service, index) => (
             <motion.article
               key={service.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, y: 40 }}
+              initial={{ opacity: 0,  x: isMobile ? 0 : -50, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{
                 duration: 0.6,

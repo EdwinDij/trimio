@@ -3,8 +3,13 @@ import React from "react";
 import { Heart, Users, Rocket } from "lucide-react";
 import { serviceItem } from "@/app/types/listItems";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
+
 
 export const About = () => {
+
+  const isMobile = useIsMobile();
+
   const missionItems: serviceItem[] = [
     {
       id: 1,
@@ -60,7 +65,7 @@ export const About = () => {
             {missionItems.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: isMobile ? 0 : index % 2 === 0 ? -50 : 50, y: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.3 }}
                 viewport={{ once: true, amount: 0.8 }}

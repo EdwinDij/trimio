@@ -16,7 +16,7 @@ export const Header = () => {
     ...(creations.length > 0
       ? [{ id: "creations", label: "Nos créations" }]
       : []),
-    { id: "contact", label: "Contact" },
+    { id: "contact", label: "Nous contacter" },
   ];
 
   return (

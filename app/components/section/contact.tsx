@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { Info, Mail, Phone } from "lucide-react";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const Contact = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [projectType, setProjectType] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
+  const isMobile = useIsMobile();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,28 +63,32 @@ export const Contact = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Formulaire */}
           <motion.form
-            className="flex-1 space-y-6  p-8 rounded-lg shadow-xl border border-[#f8fafc]/15 bg-[#14365C] text-white"
+            className="flex-1 w-full space-y-6 p-8 rounded-lg shadow-xl border border-[#f8fafc]/15 bg-[#14365C] text-white"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            onSubmit={handleSubmit} // éviter reload page pour l’exemple
+            onSubmit={handleSubmit}
           >
+            {/* Nom */}
             <div>
-              <label htmlFor="name" className=" font-semibold">
+              <label htmlFor="name" className="font-semibold">
                 Prénom/Nom de l&apos;entreprise
               </label>
               <input
                 id="name"
                 name="name"
                 required
-                className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white  focus:outline-none focus:ring-2 focus:ring-amber-500/90"
+                className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="Ex : Dupont"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
+
+            {/* Email */}
             <div>
-              <label htmlFor="email" className=" font-semibold">
+              <label htmlFor="email" className="font-semibold">
                 Email
               </label>
               <input
@@ -92,73 +98,44 @@ export const Contact = () => {
                 required
                 className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="exemple@mail.com"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+
+            {/* Types de projet */}
             <div>
-              <label htmlFor="projectType" className=" font-semibold">
+              <label htmlFor="projectType" className="font-semibold">
                 Type de projet
               </label>
-
-              <div className="flex items-center gap-4 mt-2">
-                <input
-                  type="checkbox"
-                  id="derushage"
-                  name="projectType"
-                  value="derushage"
-                  className="accent-blue-500 focus:ring-amber-500/90"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setProjectType((prev) =>
-                      prev.includes(value)
-                        ? prev.filter((v) => v !== value)
-                        : [...prev, value]
-                    );
-                  }}
-                />
-                <label htmlFor="Dérushage vidéo" className="text-white">
-                  Dérushage vidéo
-                </label>
-                <input
-                  type="checkbox"
-                  id="Montage vidéo"
-                  name="projectType"
-                  value="Montage vidéo"
-                  className="accent-blue-500 focus:ring-amber-500/90"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setProjectType((prev) =>
-                      prev.includes(value)
-                        ? prev.filter((v) => v !== value)
-                        : [...prev, value]
-                    );
-                  }}
-                />
-                <label htmlFor="Montage vidéo" className="text-white">
-                  Montage vidéo
-                </label>
-                <input
-                  type="checkbox"
-                  id="Etalonnage avancé"
-                  name="projectType"
-                  value="Etalonnage avancé"
-                  className="accent-blue-500 focus:ring-amber-500/90"
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setProjectType((prev) =>
-                      prev.includes(value)
-                        ? prev.filter((v) => v !== value)
-                        : [...prev, value]
-                    );
-                  }}
-                />
-                <label htmlFor="Etalonnage avancé" className="text-white">
-                  Etalonnage avancé
-                </label>
+              <div className="flex flex-wrap gap-4 mt-2">
+                {["Dérushage vidéo", "Montage vidéo", "Etalonnage avancé"].map(
+                  (type) => (
+                    <label key={type} className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        value={type}
+                        checked={projectType.includes(type)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setProjectType((prev) =>
+                            prev.includes(value)
+                              ? prev.filter((v) => v !== value)
+                              : [...prev, value]
+                          );
+                        }}
+                        className="accent-blue-500 focus:ring-amber-500/90"
+                      />
+                      <span>{type}</span>
+                    </label>
+                  )
+                )}
               </div>
             </div>
+
+            {/* Description */}
             <div>
-              <label htmlFor="description" className=" font-semibold">
+              <label htmlFor="description" className="font-semibold">
                 Décrivez votre projet
               </label>
               <textarea
@@ -167,15 +144,20 @@ export const Contact = () => {
                 rows={5}
                 className="mt-2 w-full rounded-md border border-gray-600 bg-[#14365C] px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500/90"
                 placeholder="Votre projet en quelques mots..."
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
-            <button
-              type="submit"
-              className=" cursor-pointer w-full bg-amber-500/90 text-white hover:bg-amber-500 font-bold py-3 rounded-md transition-colors"
-            >
-              Envoyer
-            </button>
+
+            {/* Bouton centré */}
+            <div className="pt-2 flex justify-center">
+              <button
+                type="submit"
+                className="w-full sm:w-60 bg-amber-500/90 text-white hover:bg-amber-500 font-bold py-3 rounded-md transition-colors"
+              >
+                Envoyer
+              </button>
+            </div>
           </motion.form>
 
           {/* Infos de contact */}

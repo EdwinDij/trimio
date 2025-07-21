@@ -5,8 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { LucidePlayCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const Hero = () => {
+
+  const isMobile = useIsMobile();
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       <div className="absolute inset-0"></div>
@@ -30,7 +34,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-white text-4xl md:text-6xl font-bold mb-4"
+          className="text-white text-4xl md:text-6xl font-bold mb-4 max-sm:px-4"
         >
           Donnez vie à vos vidéos,<br />
           <span className="text-amber-500/90"> avec une touche de génie</span>
@@ -40,7 +44,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white text-lg md:text-xl mb-8"
+          className="text-white text-lg md:text-xl mb-8 max-sm:px-2"
         >
           Trimio est votre partenaire créatif pour un montage vidéo
           professionnel qui captive,<br />
@@ -51,7 +55,7 @@ export const Hero = () => {
         <div className="flex justify-center gap-6 items-center max-sm:flex-col max-sm:gap-10">
 
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
           >
@@ -64,7 +68,7 @@ export const Hero = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 1.1 }}
           >
