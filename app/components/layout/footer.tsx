@@ -50,7 +50,9 @@ export const Footer = () => {
             ))}
           </div>
           <div className="flex flex-col mb-6 gap-3 items-left">
-            <h2 className="text-xl font-bold text-white mb-2">Contactez-nous</h2>
+            <h2 className="text-xl font-bold text-white mb-2">
+              Contactez-nous
+            </h2>
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
                 <Mail className="w-5 h-5 text-amber-500/90" />
@@ -67,7 +69,9 @@ export const Footer = () => {
 
         {/* LIGNE + COPYRIGHT */}
         <div className="border-t border-white/20 pt-6 text-sm text-white/60">
-         {"© " + new Date().getFullYear()} Trimio. Tous droits réservés.
+          © {new Date().getFullYear()} <strong className="text-white">Trimio</strong>. Tous droits
+          réservés. 🚀 Propulsé par{" "}
+          <span className="font-semibold text-white">Edwin Dijeont</span>
         </div>
       </div>
     </footer>
