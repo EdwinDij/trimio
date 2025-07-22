@@ -108,28 +108,31 @@ export const Contact = () => {
               <label htmlFor="projectType" className="font-semibold">
                 Type de projet
               </label>
-              <div className="flex flex-wrap gap-4 mt-2">
-                {["Dérushage vidéo", "Montage vidéo", "Etalonnage avancé"].map(
-                  (type) => (
-                    <label key={type} className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        value={type}
-                        checked={projectType.includes(type)}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setProjectType((prev) =>
-                            prev.includes(value)
-                              ? prev.filter((v) => v !== value)
-                              : [...prev, value]
-                          );
-                        }}
-                        className="accent-blue-500 focus:ring-amber-500/90"
-                      />
-                      <span>{type}</span>
-                    </label>
-                  )
-                )}
+              <div className="grid grid-cols-2 mt-2 max-sm:flex max-sm:flex-col max-sm:gap-4">
+                {[
+                  "Dérushage vidéo",
+                  "Montage vidéo",
+                  "Etalonnage avancé",
+                  "Prise de vue en drone",
+                ].map((type) => (
+                  <label key={type} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      value={type}
+                      checked={projectType.includes(type)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setProjectType((prev) =>
+                          prev.includes(value)
+                            ? prev.filter((v) => v !== value)
+                            : [...prev, value]
+                        );
+                      }}
+                      className="accent-blue-500 focus:ring-amber-500/90"
+                    />
+                    <span>{type}</span>
+                  </label>
+                ))}
               </div>
             </div>
 

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Scissors, Film } from "lucide-react";
+import { Scissors, Film, Drone } from "lucide-react";
 import { serviceItem } from "../../types/listItems";
 import { motion } from "framer-motion";
 import { useIsMobile } from "../../hooks/useIsMobile";
@@ -31,6 +31,13 @@ export const Services = () => {
         "Nous harmonisons les couleurs et créons une ambiance visuelle unique pour donner à votre vidéo un rendu cinématographique et professionnel.",
       icon: Film,
     },
+      {
+    id: 4,
+    title: "Prise de vue en drone",
+    description:
+      "Capturez des images aériennes spectaculaires pour sublimer vos projets avec une perspective unique et dynamique.",
+    icon: Drone,
+  },
   ];
 
   return (
@@ -56,7 +63,7 @@ export const Services = () => {
           Des solutions complètes pour transformer vos idées en vidéos exceptionnelles.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {servicesList.map((service, index) => (
             <motion.article
               key={service.id}
