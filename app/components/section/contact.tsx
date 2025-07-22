@@ -3,40 +3,60 @@ import { motion } from "framer-motion";
 import { Info, Mail, Phone } from "lucide-react";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const Contact = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [projectType, setProjectType] = useState<string[]>([]);
   const [description, setDescription] = useState<string>("");
-  const isMobile = useIsMobile();
+  const [feedbackMessage, setFeedbackMessage] = useState<null | {
+    type: "success" | "error" | "warning";
+    text: string;
+  }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email, projectType, description });
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APIROUTE}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        projectType,
-        description,
-      }),
-    });
-    if (response.ok) {
-      alert("Message envoyé avec succès !");
-      setName("");
-      setEmail("");
-      setProjectType([]);
-      setDescription("");
-    } else {
-      alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+    if (!name || !email || !description || projectType.length === 0) {
+      setFeedbackMessage({
+        type: "warning",
+        text: "Veuillez remplir tous les champs obligatoires.",
+      });
+      return;
     }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APIROUTE}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, projectType, description }),
+      });
+
+      if (response.ok) {
+        setFeedbackMessage({
+          type: "success",
+          text: "Votre message a bien été envoyé ! Nous vous répondrons rapidement. Pensez à vérifier vos spams.",
+        });
+        setName("");
+        setEmail("");
+        setProjectType([]);
+        setDescription("");
+      } else {
+        setFeedbackMessage({
+          type: "error",
+          text: "Une erreur est survenue. Veuillez réessayer.",
+        });
+      }
+    } catch (err) {
+      setFeedbackMessage({
+        type: "error",
+        text: "Erreur de connexion. Réessayez plus tard.",
+      });
+    }
+
+    setTimeout(() => setFeedbackMessage(null), 10000); // Disparition après 5 sec
   };
 
   return (
@@ -60,6 +80,26 @@ export const Contact = () => {
         </motion.div>
 
         {/* Conteneur côte à côte */}
+        {feedbackMessage && (
+          <motion.div
+            aria-live="polite"
+            aria-atomic="true"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className={`rounded-md p-4 text-sm text-white font-semibold 
+      ${
+        feedbackMessage.type === "success"
+          ? "bg-green-600"
+          : feedbackMessage.type === "error"
+          ? "bg-red-600"
+          : "bg-yellow-500 text-[#14365C]"
+      }
+    `}
+          >
+            {feedbackMessage.text}
+          </motion.div>
+        )}
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Formulaire */}
           <motion.form
