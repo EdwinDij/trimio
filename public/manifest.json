@@ -1,7 +1,7 @@
 {
-  "name": "Trimio",
+  "name": "Trimio Edit",
   "short_name": "Trimio",
-  "description": "Studio de montage & post-production vidéo",
+  "description": "TrimioEdit est votre partenaire pour un montage vidéo professionnel, du dérushage à l'étalonnage, en passant par la prise de vue en drone. Nous transformons vos idées en vidéos captivantes.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#14365C",
