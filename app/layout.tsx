@@ -29,6 +29,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/LOGO-1.png" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="google-site-verification" content="0tD58liHM4SUUy9ysD91IVLyK0a35ix-iFF9v4Lqdiw" />
       </head>
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased body-bg`}
