@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   title: "TrimioEdit | Montage vidéo pro & drone",
   description:
     "TrimioEdit est votre partenaire pour un montage vidéo professionnel, du dérushage à l'étalonnage, en passant par la prise de vue en drone. Nous transformons vos idées en vidéos captivantes.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/LOGO-1.png",
+  },
+  manifest: "/manifest.json",
+  verification: {
+    google: "0tD58liHM4SUUy9ysD91IVLyK0a35ix-iFF9v4Lqdiw",
+  },
 };
 
 export default function RootLayout({
@@ -25,12 +33,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/LOGO-1.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="google-site-verification" content="0tD58liHM4SUUy9ysD91IVLyK0a35ix-iFF9v4Lqdiw" />
-      </head>
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased body-bg`}
       >
